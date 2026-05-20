@@ -10,6 +10,9 @@ int main()
     // Entrada
     string nomes[20];
     int qtdalunos = 0;
+    float notas[20][5];
+    float media[20];
+    int qtdmaterias;
 
     // Processamento
     cout << "-------------------------" << endl;
@@ -28,6 +31,31 @@ int main()
     {
         cout << "Nome do aluno " << i + 1 << ": ";
         getline(cin, nomes[i]);
+    }
+
+    do
+    {
+        cout << endl;
+        cout << "Quantidade de disciplinas (1 a 5)" << endl;
+        cin >> qtdmaterias;
+    } while (qtdmaterias < 1 || qtdmaterias > 5);
+
+    for (int i = 0; i < qtdmaterias; i++)
+    {
+        cout << "Notas de " << nomes[i] << " :" << endl;
+        float soma = 0;
+        
+        for (int j = 0; j < qtdmaterias; j++)
+        {
+            do 
+            {
+                cout << "Disciplina " << j + 1 << " (1 a 5): ";
+                cin >> notas[i][j];
+            } while (notas[i][j] < 0 || notas[i][j] > 10);
+            soma += notas[i][j];
+        }
+        
+        media[i] = soma / qtdmaterias;
     }
 
     // Saída
