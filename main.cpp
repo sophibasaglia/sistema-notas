@@ -66,5 +66,38 @@ int main()
         cout << " " << i + 1 << ". " << nomes[i] << endl;
     }
 
+    cout << "-------------" << endl;
+    cout << "| RELATÓRIO |" << endl;
+    cout << "-------------" << endl;
+    int aprovados = 0, recuperacao = 0, reprovados = 0;
+
+    for (int i = 0; i < qtdalunos; i++)
+    {
+        cout << nomes[i] << " - Média: " << media[i] << " - ";
+        
+        if (media[i] > 7)
+        {
+            cout << "Aprovado!" << endl;
+            aprovados++;
+        }
+
+        else if (media[i] >= 5 )
+        {
+            cout << "Recuperação!" << endl;
+            recuperacao++;
+        }
+
+        else
+        {
+            cout << "Reprovado!" << endl;
+            reprovados++;
+        }
+    }
+
+    cout << "RESUMO: " << endl;
+    cout << "Aprovados: " << aprovados << endl;
+    cout << "Recuperação: " << recuperacao << endl;
+    cout << "Reprovados: " << reprovados << endl;
+
     return 0;
 }
