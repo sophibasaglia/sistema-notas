@@ -14,6 +14,7 @@ int main()
     float notas[20][5];
     float media[20];
     int qtdmaterias;
+    int opcaoinicial;
 
     // Processamento
 
@@ -21,6 +22,34 @@ int main()
     cout << "-------------------------" << endl;
     cout << "| SISTEMA DE NOTAS v4.0 |" << endl;
     cout << "-------------------------" << endl;
+    cout << "1 - Novo relatório" << endl;
+    cout << "2 - Ver relatório salvo" << endl;
+    cout << "Escolha uma opção: ";
+    cin >> opcaoinicial;
+
+    // leitura de arquivo (commit 5) ///// == comparação ///// = atribuição
+    if (opcaoinicial == 2)
+    {
+        ifstream leitura("relatorio.txt");
+        if (leitura.is_open())
+        {
+            string linha;
+            cout << "\n";
+            while (getline(leitura, linha))
+            {
+                cout << linha << endl;
+            }
+
+            leitura.close();
+        }
+
+        else
+        {
+            cout << "Nenhum relatório encontrado! " << endl;
+        }
+
+        return 0;
+    }
 
     // notas e médias (commit 2)
     do
@@ -115,33 +144,34 @@ int main()
         arquivo << "|   RELATÓRIO   |" << endl;
         arquivo << "-----------------" << endl;
 
-        for (int i = 0; i < qtdalunos; i ++)
+        for (int i = 0; i < qtdalunos; i++)
         {
-            arquivo << nomes[i] << " - Média: " << media[i] << " - "; 
-            if (media[i] >= 7) 
+            arquivo << nomes[i] << " - Média: " << media[i] << " - ";
+            if (media[i] >= 7)
             {
                 arquivo << "Aprovado!" << endl;
             }
 
-            else if (media[i] >= 5) 
+            else if (media[i] >= 5)
             {
                 arquivo << "Recuperação! " << endl;
             }
 
-            else {
+            else
+            {
                 arquivo << "Reprovado! " << endl;
             }
         }
         arquivo << "\nRESUMO: " << aprovados << " aprovados, " << recuperacao << " recuperação, " << reprovados << " reprovados." << endl;
-        
+
         arquivo.close();
         cout << "\nRelatório salvo com sucesso!" << endl;
     }
 
-        else 
-        {
-            cout << "Erro ao criar arquivo" << endl;
-        }
+    else
+    {
+        cout << "Erro ao criar arquivo" << endl;
+    }
 
     return 0;
 }
