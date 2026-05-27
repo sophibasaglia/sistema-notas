@@ -1,11 +1,12 @@
 #include <iostream>
 #include <string>
 #include <windows.h>
+#include <fstream>
 using namespace std;
 
 int main()
 {
-    SetConsoleOutputCP(6501);
+    SetConsoleOutputCP(65001);
 
     // Entrada
     string nomes[20];
@@ -15,10 +16,13 @@ int main()
     int qtdmaterias;
 
     // Processamento
+
+    // Leitura de alunos (commit 1)
     cout << "-------------------------" << endl;
     cout << "| SISTEMA DE NOTAS v4.0 |" << endl;
     cout << "-------------------------" << endl;
 
+    // notas e médias (commit 2)
     do
     {
         cout << "Quantidade de alunos (1 a 20)" << endl;
@@ -44,17 +48,17 @@ int main()
     {
         cout << "Notas de " << nomes[i] << " :" << endl;
         float soma = 0;
-        
+
         for (int j = 0; j < qtdmaterias; j++)
         {
-            do 
+            do
             {
                 cout << "Disciplina " << j + 1 << " (1 a 5): ";
                 cin >> notas[i][j];
             } while (notas[i][j] < 0 || notas[i][j] > 10);
             soma += notas[i][j];
         }
-        
+
         media[i] = soma / qtdmaterias;
     }
 
@@ -66,6 +70,8 @@ int main()
         cout << " " << i + 1 << ". " << nomes[i] << endl;
     }
 
+    // classificação e relatório (commit 3)
+
     cout << "-------------" << endl;
     cout << "| RELATÓRIO |" << endl;
     cout << "-------------" << endl;
@@ -74,14 +80,14 @@ int main()
     for (int i = 0; i < qtdalunos; i++)
     {
         cout << nomes[i] << " - Média: " << media[i] << " - ";
-        
+
         if (media[i] > 7)
         {
             cout << "Aprovado!" << endl;
             aprovados++;
         }
 
-        else if (media[i] >= 5 )
+        else if (media[i] >= 5)
         {
             cout << "Recuperação!" << endl;
             recuperacao++;
@@ -98,6 +104,44 @@ int main()
     cout << "Aprovados: " << aprovados << endl;
     cout << "Recuperação: " << recuperacao << endl;
     cout << "Reprovados: " << reprovados << endl;
+
+    // salvar em arquivo (commit 4)
+
+    ofstream arquivo("relatorio.txt");
+
+    if (arquivo.is_open())
+    {
+        arquivo << "-----------------" << endl;
+        arquivo << "|   RELATÓRIO   |" << endl;
+        arquivo << "-----------------" << endl;
+
+        for (int i = 0; i < qtdalunos; i ++)
+        {
+            arquivo << nomes[i] << " - Média: " << media[i] << " - "; 
+            if (media[i] >= 7) 
+            {
+                arquivo << "Aprovado!" << endl;
+            }
+
+            else if (media[i] >= 5) 
+            {
+                arquivo << "Recuperação! " << endl;
+            }
+
+            else {
+                arquivo << "Reprovado! " << endl;
+            }
+        }
+        arquivo << "\nRESUMO: " << aprovados << " aprovados, " << recuperacao << " recuperação, " << reprovados << " reprovados." << endl;
+        
+        arquivo.close();
+        cout << "\nRelatório salvo com sucesso!" << endl;
+    }
+
+        else 
+        {
+            cout << "Erro ao criar arquivo" << endl;
+        }
 
     return 0;
 }

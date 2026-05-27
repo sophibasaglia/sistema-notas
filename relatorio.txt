@@ -1,0 +1,14 @@
+-----------------
+|   RELATÓRIO   |
+-----------------
+Dani - Média: 5.2 - Recuperação! 
+Ana 1 - Média: 5.2 - Recuperação! 
+Ana 2 - Média: 4.4 - Reprovado! 
+Sophi - Média: 5.6 - Recuperação! 
+Rafa - Média: 7 - Aprovado!
+Yago - Média: 7.95938e-43 - Reprovado! 
+Guilherme - Média: 7.00649e-45 - Reprovado! 
+Laura - Média: 0 - Reprovado! 
+Pedro - Média: -1.77835e+26 - Reprovado! 
+
+RESUMO: 0 aprovados, 4 recuperação, 5 reprovados.
