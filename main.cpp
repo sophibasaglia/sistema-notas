@@ -16,6 +16,8 @@ int main()
     float media[20];
     int qtdmaterias;
     int opcaoinicial;
+    string nomemaior = nomes[0];
+    string nomemenor = nomes[0];
 
     // Processamento
 
@@ -97,6 +99,7 @@ int main()
 
     for (int i = 0; i < qtdmaterias; i++)
     {
+        media[i] = 0;
         cout << "Notas de " << nomes[i] << " :" << endl;
         float soma = 0;
 
@@ -104,7 +107,7 @@ int main()
         {
             do
             {
-                cout << "Disciplina " << j + 1 << " (1 a 5): ";
+                cout << "Notas da disciplina " << j + 1 << " (1 a ): ";
                 cin >> notas[i][j];
             } while (notas[i][j] < 0 || notas[i][j] > 10);
             soma += notas[i][j];
@@ -128,11 +131,14 @@ int main()
     cout << "-------------" << endl;
     int aprovados = 0, recuperacao = 0, reprovados = 0;
 
+    int indiceMenor;
+    int indiceMaior;
+
     for (int i = 0; i < qtdalunos; i++)
     {
         cout << nomes[i] << " - Média: " << media[i] << " - ";
 
-        if (media[i] > 7)
+        if (media[i] >= 7)
         {
             cout << "Aprovado!" << endl;
             aprovados++;
@@ -149,12 +155,20 @@ int main()
             cout << "Reprovado!" << endl;
             reprovados++;
         }
+        if (media[i] > media[indiceMaior]) {
+            indiceMaior = i;
+        } else if (media[i] < media[indiceMenor]) {
+            indiceMenor = i;
+        }
     }
 
     cout << "RESUMO: " << endl;
     cout << "Aprovados: " << aprovados << endl;
     cout << "Recuperação: " << recuperacao << endl;
     cout << "Reprovados: " << reprovados << endl;
+    cout << endl;
+    cout << "Maior media: " << nomes[indiceMaior] << " (" << media[indiceMaior] << ")" << endl;
+    cout << "Menor media: " << nomes[indiceMenor] << " (" << media[indiceMenor] << ")" << endl;
 
     // salvar em arquivo (commit 4)
 
@@ -163,7 +177,7 @@ int main()
     if (arquivo.is_open())
     {
         time_t agora = time(0);
-        char* dataHora = ctime(&agora);
+        char *dataHora = ctime(&agora);
         arquivo << "Data do relatorio: " << dataHora << endl;
 
         arquivo << "-----------------" << endl;
